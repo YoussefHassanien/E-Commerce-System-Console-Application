@@ -5,13 +5,19 @@ public class Product {
     private double price;
     
     public Product(String name, int quantity, double price){
-        setName(name);
-        setQuantity(quantity);
-        setPrice(price);
+        if(!setName(name)){
+            throw new IllegalArgumentException("Invalid name");
+        }
+        if(!setQuantity(quantity)){
+            throw new IllegalArgumentException("Invalid quantity");
+        }
+        if(!setPrice(price)){
+            throw new IllegalArgumentException("Invalid price");
+        }
     }
 
     private boolean setName(String name){
-        if(!name.equals("") || !name.equals(" ")){
+        if(name != null && !name.trim().isEmpty()){
             this.name = name;
             return true;
         }  
@@ -50,8 +56,7 @@ public class Product {
         if(this.quantity - quantity >= 0){
             this.quantity -= quantity;
             return true;
-        } else {
-            throw new RuntimeException("Cannot reduce" + this.name + "quantity to below 0");
         }
+        return false;
     }
 }

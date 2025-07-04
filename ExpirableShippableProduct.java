@@ -7,14 +7,20 @@ public class ExpirableShippableProduct extends Product implements Expirable, Shi
 
     public ExpirableShippableProduct(String name, int quantity, double price, LocalDate expiryDate, double weight, double shippingFees){
         super(name, quantity, price);
-        setExpiryDate(expiryDate);
-        setWeight(weight);
-        setShippingFees(shippingFees);
+        if(!setExpiryDate(expiryDate)) {
+            throw new IllegalArgumentException("Invalid expiry date");
+        }
+        if(!setWeight(weight)) {
+            throw new IllegalArgumentException("Invalid weight");
+        }
+        if(!setShippingFees(shippingFees)) {
+            throw new IllegalArgumentException("Invalid shipping fees");
+        }
     }
 
     @Override
     public boolean setExpiryDate(LocalDate expiryDate){
-        if(expiryDate.isAfter(LocalDate.now())){
+        if(expiryDate != null && expiryDate.isAfter(LocalDate.now())){
             this.expiryDate = expiryDate;
             return true;
         }

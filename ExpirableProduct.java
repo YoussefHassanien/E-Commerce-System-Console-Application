@@ -5,7 +5,9 @@ public class ExpirableProduct extends Product implements Expirable {
 
     public ExpirableProduct(String name, int quantity, double price, LocalDate expiryDate){
         super(name, quantity, price);
-        setExpiryDate(expiryDate);
+        if(!setExpiryDate(expiryDate)) {
+            throw new IllegalArgumentException("Invalid expiry date");
+        }
     }
 
     @Override

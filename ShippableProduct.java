@@ -4,8 +4,12 @@ public class ShippableProduct extends Product implements Shippable {
 
     public ShippableProduct(String name, int quantity, double price, double weight, double shippingFees){
         super(name, quantity, price);
-        setWeight(weight);
-        setShippingFees(shippingFees);
+        if(!setWeight(weight)) {
+            throw new IllegalArgumentException("Invalid weight");
+        }
+        if(!setShippingFees(shippingFees)) {
+            throw new IllegalArgumentException("Invalid shipping fees");
+        }
     }
 
     @Override
