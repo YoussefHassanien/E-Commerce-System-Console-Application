@@ -1,20 +1,22 @@
+
 public class ShippableProduct extends Product implements Shippable {
+
     private double weight;
     private double shippingFees;
 
-    public ShippableProduct(String name, int quantity, double price, double weight, double shippingFees){
+    public ShippableProduct(String name, int quantity, double price, double weight, double shippingFees) {
         super(name, quantity, price);
-        if(!setWeight(weight)) {
+        if (!setWeight(weight)) {
             throw new IllegalArgumentException("Invalid weight");
         }
-        if(!setShippingFees(shippingFees)) {
+        if (!setShippingFees(shippingFees)) {
             throw new IllegalArgumentException("Invalid shipping fees");
         }
     }
 
     @Override
-    public boolean setWeight(double weight){
-        if(weight > 0){
+    public boolean setWeight(double weight) {
+        if (weight > 0) {
             this.weight = weight;
             return true;
         }
@@ -22,8 +24,8 @@ public class ShippableProduct extends Product implements Shippable {
     }
 
     @Override
-    public boolean setShippingFees(double shippingFees){
-        if(shippingFees > 0){
+    public boolean setShippingFees(double shippingFees) {
+        if (shippingFees > 0) {
             this.shippingFees = shippingFees;
             return true;
         }
@@ -36,7 +38,7 @@ public class ShippableProduct extends Product implements Shippable {
     }
 
     @Override
-    public double getWeight(){
+    public double getWeight() {
         return this.weight;
     }
 }

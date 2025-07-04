@@ -1,26 +1,28 @@
+
 import java.time.LocalDate;
 
 public class ExpirableShippableProduct extends Product implements Expirable, Shippable {
+
     private LocalDate expiryDate;
     private double weight;
     private double shippingFees;
 
-    public ExpirableShippableProduct(String name, int quantity, double price, LocalDate expiryDate, double weight, double shippingFees){
+    public ExpirableShippableProduct(String name, int quantity, double price, LocalDate expiryDate, double weight, double shippingFees) {
         super(name, quantity, price);
-        if(!setExpiryDate(expiryDate)) {
+        if (!setExpiryDate(expiryDate)) {
             throw new IllegalArgumentException("Invalid expiry date");
         }
-        if(!setWeight(weight)) {
+        if (!setWeight(weight)) {
             throw new IllegalArgumentException("Invalid weight");
         }
-        if(!setShippingFees(shippingFees)) {
+        if (!setShippingFees(shippingFees)) {
             throw new IllegalArgumentException("Invalid shipping fees");
         }
     }
 
     @Override
-    public boolean setExpiryDate(LocalDate expiryDate){
-        if(expiryDate != null && expiryDate.isAfter(LocalDate.now())){
+    public boolean setExpiryDate(LocalDate expiryDate) {
+        if (expiryDate != null && expiryDate.isAfter(LocalDate.now())) {
             this.expiryDate = expiryDate;
             return true;
         }
@@ -28,13 +30,13 @@ public class ExpirableShippableProduct extends Product implements Expirable, Shi
     }
 
     @Override
-    public boolean isExpired(){
+    public boolean isExpired() {
         return this.expiryDate.isBefore(LocalDate.now());
     }
 
-        @Override
-    public boolean setWeight(double weight){
-        if(weight > 0){
+    @Override
+    public boolean setWeight(double weight) {
+        if (weight > 0) {
             this.weight = weight;
             return true;
         }
@@ -42,8 +44,8 @@ public class ExpirableShippableProduct extends Product implements Expirable, Shi
     }
 
     @Override
-    public boolean setShippingFees(double shippingFees){
-        if(shippingFees > 0){
+    public boolean setShippingFees(double shippingFees) {
+        if (shippingFees > 0) {
             this.shippingFees = shippingFees;
             return true;
         }
@@ -56,7 +58,7 @@ public class ExpirableShippableProduct extends Product implements Expirable, Shi
     }
 
     @Override
-    public double getWeight(){
+    public double getWeight() {
         return this.weight;
     }
 }

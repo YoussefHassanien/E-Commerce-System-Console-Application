@@ -1,18 +1,20 @@
+
 import java.time.LocalDate;
 
 public class ExpirableProduct extends Product implements Expirable {
+
     private LocalDate expiryDate;
 
-    public ExpirableProduct(String name, int quantity, double price, LocalDate expiryDate){
+    public ExpirableProduct(String name, int quantity, double price, LocalDate expiryDate) {
         super(name, quantity, price);
-        if(!setExpiryDate(expiryDate)) {
+        if (!setExpiryDate(expiryDate)) {
             throw new IllegalArgumentException("Invalid expiry date");
         }
     }
 
     @Override
-    public boolean setExpiryDate(LocalDate expiryDate){
-        if(expiryDate.isAfter(LocalDate.now())){
+    public boolean setExpiryDate(LocalDate expiryDate) {
+        if (expiryDate.isAfter(LocalDate.now())) {
             this.expiryDate = expiryDate;
             return true;
         }
@@ -20,7 +22,7 @@ public class ExpirableProduct extends Product implements Expirable {
     }
 
     @Override
-    public boolean isExpired(){
+    public boolean isExpired() {
         return this.expiryDate.isBefore(LocalDate.now());
     }
 }
